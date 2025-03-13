@@ -1,0 +1,195 @@
+REGIÃO CENTRAL
+----------------------------------------------------------------------------------------
+CREATE (central:Regiao {nome: 'Central'});
+
+CRIANDO A LISTA DE REGIÕES
+----------------------------------------------------------------------------------------
+CREATE 
+(sul:Central {nome: 'Sul'}),
+(norte:Central {nome: 'Norte'}),
+(oeste:Central {nome: 'Oeste'}),
+(leste:Central {nome: 'Leste'});
+
+RELACIONAMENTO ENTRE A CENTRAL E AS REGIÕES
+----------------------------------------------------------------------------------------
+MATCH (a:Regiao), (b:Central)
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+CRIANDO A LISTA DE CIDADES
+-----------------------------------------------------------------------------------------
+CREATE 
+(curitiba: Cidade {nome: 'Curitiba', central: 'sul'}),
+(florianopolis: Cidade {nome: 'Florianopolis',central: 'sul'}),
+(portoAlegre: Cidade {nome: 'Porto Alegre',central: 'sul'}),
+(manaus: Cidade {nome: 'Manaus',central: 'norte'}),
+(belem: Cidade {nome: 'Belem',central: 'norte'}),
+(portovelho: Cidade {nome: 'Porto Velho', central: 'norte'}),
+(brasilia: Cidade {nome: 'Brasilia', central: 'oeste'}),
+(goiania: Cidade {nome: 'Goiania', central: 'oeste'}),
+(campogrande: Cidade {nome: 'Campo Grande', central: 'oeste'}),
+(saopaulo: Cidade {nome: 'Sao Paulo', central: 'leste'}),
+(riodejaneiro: Cidade {nome: 'Rio de Janeiro', central: 'leste'}),
+(belohorizonte: Cidade {nome: 'Belo Horizonte', central: 'leste'});
+
+RELACIONAMENTO ENTRE AS CIDADES E A REGIAO
+-----------------------------------------------------------------------------------------
+MATCH (a:Central), (b:Cidade)
+WHERE a.nome = 'Sul' and b.central = 'sul'
+CREATE (b)-[r :Pertence]->(a)
+RETURN a, b
+
+MATCH (a:Central), (b:Cidade)
+WHERE a.nome = 'Leste' and b.central = 'leste'
+CREATE (b)-[r :Pertence]->(a)
+RETURN a, b
+
+MATCH (a:Central), (b:Cidade)
+WHERE a.nome = 'Oeste' and b.central = 'oeste'
+CREATE (b)-[r :Pertence]->(a)
+RETURN a, b
+
+MATCH (a:Central), (b:Cidade)
+WHERE a.nome = 'Norte' and b.central = 'norte'
+CREATE (b)-[r :Pertence]->(a)
+RETURN a, b
+
+CRIANDO A LISTA DE SUPERVISORES
+-----------------------------------------------------------------------------------------
+CREATE 
+(sup_curitiba:Supervisor {nome: 'João da Silva', cpf: '123.456.789-00', endereco: 'Rua A, Bairro Centro', telefone: '41 99999-0000'}),
+(sup_florianopolis:Supervisor {nome: 'Maria de Souza', cpf: '234.567.890-11', endereco: 'Rua B, Bairro Sul', telefone: '48 98888-1111'}),
+(sup_portoalegre:Supervisor {nome: 'Pedro Oliveira', cpf: '345.678.901-22', endereco: 'Rua C, Bairro Norte', telefone: '51 97777-2222'}),
+(sup_manaus:Supervisor {nome: 'Carlos Pereira', cpf: '456.789.012-33', endereco: 'Rua D, Bairro Oeste', telefone: '92 96666-3333'}),
+(sup_belem:Supervisor {nome: 'Ana Costa', cpf: '567.890.123-44', endereco: 'Rua E, Bairro Leste', telefone: '91 95555-4444'}),
+(sup_portovelho:Supervisor {nome: 'Júlia Santos', cpf: '678.901.234-55', endereco: 'Rua F, Bairro Central', telefone: '69 94444-5555'}),
+(sup_brasilia:Supervisor {nome: 'Marcos Lima', cpf: '789.012.345-66', endereco: 'Rua G, Bairro Norte', telefone: '61 93333-6666'}),
+(sup_goiania:Supervisor {nome: 'Fernanda Ribeiro', cpf: '890.123.456-77', endereco: 'Rua H, Bairro Sul', telefone: '62 92222-7777'}),
+(sup_campogrande:Supervisor {nome: 'Lucas Martins', cpf: '901.234.567-88', endereco: 'Rua I, Bairro Oeste', telefone: '67 91111-8888'}),
+(sup_saopaulo:Supervisor {nome: 'Beatriz Souza', cpf: '012.345.678-99', endereco: 'Rua J, Bairro Leste', telefone: '11 90000-9999'}),
+(sup_rio:Supervisor {nome: 'Rafael Alves', cpf: '123.456.789-01', endereco: 'Rua K, Bairro Central', telefone: '21 91111-0001'}),
+(sup_bh:Supervisor {nome: 'Clara Gomes', cpf: '234.567.890-12', endereco: 'Rua L, Bairro Norte', telefone: '31 92222-1112'});
+
+
+RELACIONAMENTO ENTRE CIDADES E SUPERVISORES
+------------------------------------------------------------------------------------------
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'João da Silva' and b.nome = 'Curitiba'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Maria de Souza' and b.nome = 'Florianopolis'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Pedro Oliveira' and b.nome = 'Porto Alegre'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Carlos Pereira' and b.nome = 'Manaus'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Ana Costa' and b.nome = 'Belem'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Júlia Santos' and b.nome = 'Porto Velho'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Marcos Lima' and b.nome = 'Brasilia'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Fernanda Ribeiro' and b.nome = 'Goiania'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Lucas Martins' and b.nome = 'Campo Grande'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Beatriz Souza' and b.nome = 'São Paulo'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Rafael Alves' and b.nome = 'Rio de Janeiro'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+MATCH (a:Supervisor), (b:Cidade)
+WHERE a.nome = 'Clara Gomes' and b.nome = 'Belo Horizonte'
+CREATE (a)-[r :Pertence]->(b)
+RETURN a, b
+
+
+CRIANDO A LISTA DE VENDEDORES
+------------------------------------------------------------------------------------------
+CREATE
+(vendedor_curitiba1: Vendedor {nome: 'Maria de Fatima', cpf: '123.456.799-00', telefone: '41 99569-0800', endereco: 'Rua X, Bairro Centro', email: 'maria.fatima@example.com', supervisor: 'João da Silva'}),
+(vendedor_curitiba2: Vendedor {nome: 'Carlos Almeida', cpf: '987.654.321-00', telefone: '41 99874-5678', endereco: 'Rua Y, Bairro Batel', email: 'carlos.almeida@example.com', supervisor: 'João da Silva'}),
+(vendedor_curitiba3: Vendedor {nome: 'Ana Oliveira', cpf: '234.567.890-11', telefone: '41 99456-7890', endereco: 'Rua Z, Bairro Mercês', email: 'ana.oliveira@example.com', supervisor: 'João da Silva'}),
+
+(vendedor_florianopolis1: Vendedor {nome: 'Bruno Lima', cpf: '345.678.901-22', telefone: '41 99234-5678', endereco: 'Rua W, Bairro Água Verde', email: 'bruno.lima@example.com', supervisor: 'Maria de Souza'}),
+(vendedor_florianopolis2: Vendedor {nome: 'Clara Santos', cpf: '456.789.012-33', telefone: '41 99345-6789', endereco: 'Rua V, Bairro Portão', email: 'clara.santos@example.com', supervisor: 'Maria de Souza'}),
+(vendedor_florianopolis3: Vendedor {nome: 'Diego Costa', cpf: '567.890.123-44', telefone: '41 99123-4567', endereco: 'Rua U, Bairro Cabral', email: 'diego.costa@example.com', supervisor: 'Maria de Souza'}),
+
+(vendedor_portoalegre1: Vendedor {nome: 'Eduarda Souza', cpf: '678.901.234-55', telefone: '41 99678-9012', endereco: 'Rua T, Bairro Boqueirão', email: 'eduarda.souza@example.com', supervisor: 'Pedro Oliveira'}),
+(vendedor_portoalegre2: Vendedor {nome: 'Fernando Rocha', cpf: '789.012.345-66', telefone: '41 99555-1234', endereco: 'Rua S, Bairro Rebouças', email: 'fernando.rocha@example.com', supervisor: 'Pedro Oliveira'}),
+(vendedor_portoalegre3: Vendedor {nome: 'Gabriela Mendes', cpf: '890.123.456-77', telefone: '41 99876-5432', endereco: 'Rua R, Bairro Hauer', email: 'gabriela.mendes@example.com', supervisor: 'Pedro Oliveira'}),
+
+(vendedor_manaus1: Vendedor {nome: 'Hugo Ferreira', cpf: '901.234.567-88', telefone: '41 99432-1234', endereco: 'Rua Q, Bairro Juvevê', email: 'hugo.ferreira@example.com', supervisor: 'Carlos Pereira'}),
+(vendedor_manaus2: Vendedor {nome: 'Isabela Martins', cpf: '012.345.678-99', telefone: '41 99777-8888', endereco: 'Rua P, Bairro Bigorrilho', email: 'isabela.martins@example.com', supervisor: 'Carlos Pereira'}),
+(vendedor_manaus3: Vendedor {nome: 'João Pedro', cpf: '123.987.654-00', telefone: '41 99333-4444', endereco: 'Rua O, Bairro Xaxim', email: 'joao.pedro@example.com', supervisor: 'Carlos Pereira'}),
+
+(vendedor_belem1: Vendedor {nome: 'Juliana Pereira', cpf: '987.654.321-11', telefone: '41 99555-6666', endereco: 'Rua N, Bairro Tarumã', email: 'juliana.pereira@example.com', supervisor: 'Ana Costa'}),
+(vendedor_belem2: Vendedor {nome: 'Lucas Andrade', cpf: '876.543.210-22', telefone: '41 99222-5555', endereco: 'Rua M, Bairro Santa Felicidade', email: 'lucas.andrade@example.com', supervisor: 'Ana Costa'}),
+(vendedor_belem3: Vendedor {nome: 'Mariana Lopes', cpf: '765.432.109-33', telefone: '41 99888-9999', endereco: 'Rua L, Bairro Sítio Cercado', email: 'mariana.lopes@example.com', supervisor: 'Ana Costa'}),
+
+(vendedor_portovelho1: Vendedor {nome: 'Nicolas Reis', cpf: '654.321.098-44', telefone: '41 99666-7777', endereco: 'Rua K, Bairro Prado Velho', email: 'nicolas.reis@example.com', supervisor: 'Júlia Santos'}),
+(vendedor_portovelho2: Vendedor {nome: 'Olivia Barros', cpf: '543.210.987-55', telefone: '41 99444-5555', endereco: 'Rua J, Bairro São Francisco', email: 'olivia.barros@example.com', supervisor: 'Júlia Santos'}),
+(vendedor_portovelho3: Vendedor {nome: 'Pedro Henrique', cpf: '432.109.876-66', telefone: '41 99999-0000', endereco: 'Rua I, Bairro Alto da Glória', email: 'pedro.henrique@example.com', supervisor: 'Júlia Santos'}),
+
+(vendedor_brasilia1: Vendedor {nome: 'Rafael Xavier', cpf: '321.098.765-77', telefone: '41 99111-2222', endereco: 'Rua H, Bairro Guaíra', email: 'rafael.xavier@example.com', supervisor: 'Marcos Lima'}),
+(vendedor_brasilia2: Vendedor {nome: 'Sofia Moreira', cpf: '210.987.654-88', telefone: '41 99333-4444', endereco: 'Rua G, Bairro Pinheirinho', email: 'sofia.moreira@example.com', supervisor: 'Marcos Lima'}),
+(vendedor_brasilia3: Vendedor {nome: 'Thiago Rodrigues', cpf: '109.876.543-99', telefone: '41 99555-6666', endereco: 'Rua F, Bairro Centro Cívico', email: 'thiago.rodrigues@example.com', supervisor: 'Marcos Lima'}),
+
+(vendedor_goiania1: Vendedor {nome: 'Vanessa Silva', cpf: '098.765.432-00', telefone: '41 99444-5555', endereco: 'Rua E, Bairro São Braz', email: 'vanessa.silva@example.com', supervisor: 'Fernanda Ribeiro'}),
+(vendedor_goiania2: Vendedor {nome: 'Wagner Costa', cpf: '987.654.321-11', telefone: '41 99888-7777', endereco: 'Rua D, Bairro Portão', email: 'wagner.costa@example.com', supervisor: 'Fernanda Ribeiro'}),
+(vendedor_goiania3: Vendedor {nome: 'Ximena Fernandes', cpf: '876.543.210-22', telefone: '41 99666-5555', endereco: 'Rua C, Bairro Batel', email: 'ximena.fernandes@example.com', supervisor: 'Fernanda Ribeiro'}),
+
+(vendedor_campogrande1: Vendedor {nome: 'Bianca Ramos', cpf: '432.109.876-66', telefone: '41 99555-7777', endereco: 'Rua 2, Bairro Hauer', email: 'bianca.ramos@example.com', supervisor: 'Lucas Martins'}),
+(vendedor_campogrande2: Vendedor {nome: 'Caio Teixeira', cpf: '321.098.765-77', telefone: '41 99444-6666', endereco: 'Rua 3, Bairro Juvevê', email: 'caio.teixeira@example.com', supervisor: 'Lucas Martins'}),
+(vendedor_campogrande3: Vendedor {nome: 'Daniela Vieira', cpf: '210.987.654-88', telefone: '41 99888-9999', endereco: 'Rua 4, Bairro Boqueirão', email: 'daniela.vieira@example.com', supervisor: 'Lucas Martins'}),
+
+(vendedor_saopaulo1: Vendedor {nome: 'Eduardo Lopes', cpf: '109.876.543-99', telefone: '41 99666-1111', endereco: 'Rua 5, Bairro Mercês', email: 'eduardo.lopes@example.com', supervisor: 'Beatriz Souza'}),
+(vendedor_saopaulo2: Vendedor {nome: 'Fernanda Lima', cpf: '098.765.432-00', telefone: '41 99777-2222', endereco: 'Rua 6, Bairro Santa Felicidade', email: 'fernanda.lima@example.com', supervisor: 'Beatriz Souza'}),
+(vendedor_saopaulo3: Vendedor {nome: 'Gabriel Sousa', cpf: '987.654.321-11', telefone: '41 99111-3333', endereco: 'Rua 7, Bairro Xaxim', email: 'gabriel.sousa@example.com', supervisor: 'Beatriz Souza'}),
+
+(vendedor_rio1: Vendedor {nome: 'Helena Borges', cpf: '876.543.210-22', telefone: '41 99222-4444', endereco: 'Rua 8, Bairro Tarumã', email: 'helena.borges@example.com', supervisor: 'Rafael Alves'}),
+(vendedor_rio2: Vendedor {nome: 'Igor Moreira', cpf: '765.432.109-33', telefone: '41 99333-5555', endereco: 'Rua 9, Bairro Água Verde', email: 'igor.moreira@example.com', supervisor: 'Rafael Alves'}),
+(vendedor_rio3: Vendedor {nome: 'Jéssica Matos', cpf: '654.321.098-44', telefone: '41 99444-6666', endereco: 'Rua 10, Bairro Prado Velho', email: 'jessica.matos@example.com', supervisor: 'Rafael Alves'}),
+
+(vendedor_bh1: Vendedor {nome: 'Yago Nunes', cpf: '765.432.109-33', telefone: '41 99333-4444', endereco: 'Rua B, Bairro Bigorrilho', email: 'yago.nunes@example.com', supervisor: 'Clara Gomes'}),
+(vendedor_bh2: Vendedor {nome: 'Zara Dias', cpf: '654.321.098-44', telefone: '41 99999-8888', endereco: 'Rua A, Bairro Água Verde', email: 'zara.dias@example.com', supervisor: 'Clara Gomes'}),
+(vendedor_bh3: Vendedor {nome: 'Artur Gomes', cpf: '543.210.987-55', telefone: '41 99222-3333', endereco: 'Rua 1, Bairro Rebouças', email: 'artur.gomes@example.com', supervisor: 'Clara Gomes'});
+
+
+RELACIONAMENTO ENTRE SUPERVISORES E VENDEDORES
+-------------------------------------------------------------------------------------------
+MATCH (a:Supervisor), (b:Vendedor)
+WHERE a.nome = b.supervisor
+CREATE (b)-[r :Pertence]->(a)
+RETURN a, b
+
