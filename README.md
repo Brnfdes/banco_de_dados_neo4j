@@ -1,6 +1,6 @@
 ## Sistema de cadastro de vendedores
 
-O objetivo é criar um sistema de cadatros de vendedores, respeitando os tópicos e suas dependências.
+O objetivo é criar um sistema de cadatros de vendedores no sistema de banco de dados Neo4j.
 
 Estrutura da regional:
 
